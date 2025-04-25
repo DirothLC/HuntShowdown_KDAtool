@@ -63,6 +63,28 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>com.github.akman</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <executions>
+                <execution>
+                <phase>verify</phase>
+                <goals>
+                    <goal>jpackage</goal>
+                </goals>
+                <configuration>
+                    <vendor>DirothLC</vendor>
+                    <appName>Hunt KDA calculator</appName>
+                    <mainClass>kz.huntshowdown.kdacalc.huntshowdownkdacalculator.runner.HuntKDACalculator</mainClass>
+                    <mainJar>${project.build.finalName}.jar</mainJar>
+                    <runtimeImage>${project.build.directory}/app</runtimeImage>
+                    <type>exe</type>
+                    <input>${project.build.directory}</input>
+                    <dest>${project.build.directory}/dist</dest>
+                </configuration>
+                </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
