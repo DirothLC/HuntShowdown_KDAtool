@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="171.0" prefWidth="576.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kz.huntshowdown.kdacalc.huntshowdownkdacalculator.controllers.IntroController">
+   <children>
+      <TextField fx:id="killsField" layoutX="14.0" layoutY="14.0" promptText="Kills" />
+      <TextField fx:id="assistsField" layoutX="15.0" layoutY="48.0" promptText="Assists" />
+      <TextField fx:id="deathsField" layoutX="15.0" layoutY="81.0" promptText="Deaths" />
+      <TextArea fx:id="resultArea" editable="false" layoutX="261.0" layoutY="15.0" prefHeight="126.0" prefWidth="301.0" promptText="Result">
+         <font>
+            <Font name="Calibri" size="14.0" />
+         </font></TextArea>
+      <TextField fx:id="desiredKDAField" layoutX="15.0" layoutY="117.0" promptText="Desired by KDA" />
+      <Button layoutX="181.0" layoutY="14.0" mnemonicParsing="false" onAction="#onCalculateButtonClick" text="Calculate" />
+      <Button layoutX="180.0" layoutY="47.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="65.0" text="Save" />
+   </children>
+</AnchorPane>
