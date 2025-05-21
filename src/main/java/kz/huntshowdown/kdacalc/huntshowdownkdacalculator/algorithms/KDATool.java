@@ -16,14 +16,9 @@ public class KDATool {
     }
 
     public int desiredKDA(int kills, int assists, int deaths,  double desiredKDA) {
-        double kda = (double) (kills + assists) / deaths;
-        double missingKills=0;
-        if (desiredKDA < kda) {
-           missingKills =   deathsToLowerKDA(kills, assists, deaths, desiredKDA);
 
-        } else {
-            missingKills = desiredKDA * deaths - kills - assists;
-        }
+           double missingKills = desiredKDA * deaths - kills - assists;
+
             return (int) Math.ceil(Math.max(0, missingKills));
 
     }

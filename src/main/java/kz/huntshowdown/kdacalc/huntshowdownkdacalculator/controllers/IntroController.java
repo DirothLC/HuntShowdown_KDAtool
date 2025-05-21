@@ -49,12 +49,23 @@ public class IntroController {
         int assists= assistsField.getValue();
         int deaths= deathsField.getValue();
 
-        result+="Current KDA: "+calculator.kdaCalculate(kills,assists,deaths)+"\n\n";
-        result+="Difference: "+calculator.diff(kills,deaths)+" kills\n\n";
+        double currentKDA = calculator.kdaCalculate(kills, assists, deaths);
+        double nextKDA = currentKDA+0.01;
+        double previousKDA = currentKDA-0.01;
+
+        result+="Current KDA: "+currentKDA+"\n";
+        result+="Difference: "+calculator.diff(kills,deaths)+" kills\n";
+
+        result+="Kills to "+nextKDA+" KDA: "+calculator.desiredKDA(kills, assists, deaths, nextKDA)+" kills\n";
+        result+="Deaths to "+previousKDA+" KDA: "+calculator.deathsToLowerKDA(kills, assists, deaths, previousKDA)+" deaths\n";
 
         if(desiredKDAField.getValue()!=null) {
             double desiredKDA = desiredKDAField.getValue();
-            result += "Kills to desired KDA: " + calculator.desiredKDA(kills, assists, deaths, desiredKDA) + " \n";
+            if(desiredKDA<currentKDA){
+                result += "Deaths to target KDA (lower): " + calculator.deathsToLowerKDA(kills, assists, deaths, desiredKDA);
+            }else {
+                result += "Kills to desired KDA: " + calculator.desiredKDA(kills, assists, deaths, desiredKDA) + " \n";
+            }
         }
         resultArea.setText(result);
 
