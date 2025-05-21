@@ -3,8 +3,7 @@ module kz.huntshowdown.kdacalc.huntshowdownkdacalculator {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
-    requires com.dlsc.formsfx;
-    requires org.kordamp.bootstrapfx.core;
+
 
 
     exports kz.huntshowdown.kdacalc.huntshowdownkdacalculator.runner;

@@ -1,5 +1,6 @@
 package kz.huntshowdown.kdacalc.huntshowdownkdacalculator.utils;
 
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 
 import java.io.FileNotFoundException;
@@ -15,7 +16,7 @@ public class SaveLoader {
     private static final Path FILE_PATH = Path.of(System.getProperty("user.home"), FILE_NAME);
 
 
-    public static void load(TextField killsField, TextField assistsField, TextField deathsField, TextField desiredKDAField) {
+    public static void load(Spinner<Integer> killsField, Spinner<Integer> assistsField, Spinner<Integer> deathsField, Spinner<Double> desiredKDAField) {
         try {
             ensureFileExists();
 
@@ -24,25 +25,39 @@ public class SaveLoader {
                 props.load(input);
             }
 
-            killsField.setText(props.getProperty("kills", ""));
-            assistsField.setText(props.getProperty("assists", ""));
-            deathsField.setText(props.getProperty("deaths", ""));
-            desiredKDAField.setText(props.getProperty("desiredKDA", ""));
+            String killsStr = props.getProperty("kills", "0");
+            String assistsStr = props.getProperty("assists", "0");
+            String deathsStr = props.getProperty("deaths", "1");
+            String desiredKdaStr = props.getProperty("desiredKDA", "1.0");
+
+            try {
+                killsField.getValueFactory().setValue(Integer.parseInt(killsStr));
+            } catch (NumberFormatException ignored) {}
+            try {
+                assistsField.getValueFactory().setValue(Integer.parseInt(assistsStr));
+            } catch (NumberFormatException ignored) {}
+            try {
+                deathsField.getValueFactory().setValue(Integer.parseInt(deathsStr));
+            } catch (NumberFormatException ignored) {}
+            try {
+                desiredKDAField.getValueFactory().setValue(Double.parseDouble(desiredKdaStr));
+            } catch (NumberFormatException ignored) {}
+
 
         } catch (IOException e) {
            Reporter.alertErrorReporting("Error",e.getMessage());
         }
     }
 
-    public static void save(String kills, String assists, String deaths, String desiredKDA) {
+    public static void save(Spinner<Integer> killsSpinner, Spinner<Integer> assistsSpinner, Spinner<Integer> deathsSpinner, Spinner<Double> desiredKDASpinner) {
         try {
             ensureFileExists();
 
             Properties props = new Properties();
-            props.setProperty("kills", kills);
-            props.setProperty("assists", assists);
-            props.setProperty("deaths", deaths);
-            props.setProperty("desiredKDA", desiredKDA);
+            props.setProperty("kills", String.valueOf(killsSpinner.getValue()));
+            props.setProperty("assists", String.valueOf(assistsSpinner.getValue()));
+            props.setProperty("deaths", String.valueOf(deathsSpinner.getValue()));
+            props.setProperty("desiredKDA", String.valueOf(desiredKDASpinner.getValue()));
 
             try (OutputStream output = Files.newOutputStream(FILE_PATH)) {
                 props.store(output, "Hunt KDA Tool Saved Data");
